@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+    <title>Secure Online Banking</title>
+    <style>
+        body { font-family: Arial; background: #eef2f3; padding: 40px; }
+        .container { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h2 { text-align: center; }
+        form { margin: 15px 0; display: flex; flex-direction: column; }
+        input, button { padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc; }
+        button { background: #007BFF; color: white; border: none; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .alert-success { background-color: #d4edda; color: #155724; padding: 10px; margin-bottom: 10px; border-radius: 5px; }
+        .alert-danger { background-color: #f8d7da; color: #721c24; padding: 10px; margin-bottom: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome {{ user.username }}!</h2>
+        <p>Current Balance: <strong>${{ "%.2f"|format(user.balance) }}</strong></p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <input type="number" name="amount" step="0.01" placeholder="Enter amount" required>
+            <button type="submit" name="action" value="deposit">Deposit</button>
+            <button type="submit" name="action" value="withdraw">Withdraw</button>
+        </form>
+    </div>
+</body>
+</html>

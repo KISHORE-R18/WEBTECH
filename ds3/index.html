@@ -1,0 +1,48 @@
+# EXP_3
+# Create a simple inventory management system to generate  QR code for each product thereby allowing user validation using PHP.
+
+#file.php
+
+<?php
+include 'lib/qrlib.php';
+
+$productName = 'Sample Product';
+$productCode = '12345';
+$qrFile = 'qrcode.png';  
+
+$data = "Product: $productName\nCode: $productCode";
+QRcode::png($data, $qrFile, 'L', 4, 2);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Inventory QR Code</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f4f4f4;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+    }
+    .qr-container {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Product QR Code</h1>
+
+  <div class="qr-container">
+    <h3>QR Code for Product: <?php echo $productName; ?></h3>
+    <img src="<?php echo $qrFile; ?>" alt="QR Code">
+    <p>Product Code: <?php echo $productCode; ?></p>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+
+<!DOCTYPE html5>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+      background-color: #f0f0f0;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Rock, Paper, Scissors</h1>
+
+  <button onclick="play('Rock')">Rock</button>
+  <button onclick="play('Paper')">Paper</button>
+  <button onclick="play('Scissors')">Scissors</button>
+
+  <div id="result"></div>
+
+  <script>
+    function play(userChoice) {
+      const choices = ['Rock', 'Paper', 'Scissors'];
+
+      if (!choices.includes(userChoice)) {
+        document.getElementById('result').textContent = 'Invalid choice.';
+        return;
+      }
+
+      const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+      let outcome = '';
+      if (userChoice === computerChoice) {
+        outcome = "It's a tie!";
+      } else if (
+        (userChoice === 'Rock' && computerChoice === 'Scissors') ||
+        (userChoice === 'Paper' && computerChoice === 'Rock') ||
+        (userChoice === 'Scissors' && computerChoice === 'Paper')
+      ) {
+        outcome = 'You win!';
+      } else {
+        outcome = 'Computer wins!';
+      }
+
+      document.getElementById('result').innerHTML = `
+        You chose <b>${userChoice}</b><br>
+        Computer chose <b>${computerChoice}</b><br>
+        ${outcome}
+      `;
+    }
+  </script>
+
+</body>
+</html>
